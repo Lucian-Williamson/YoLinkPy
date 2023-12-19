@@ -1,0 +1,4 @@
+numpy
+yolink-api
+requests
+python-dotenv

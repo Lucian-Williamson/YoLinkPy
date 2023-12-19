@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: YoLinkPy
+Version: 0.1
+Requires-Dist: numpy
+Requires-Dist: yolink-api
+Requires-Dist: requests
+Requires-Dist: python-dotenv

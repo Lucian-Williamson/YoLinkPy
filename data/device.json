@@ -1,0 +1,254 @@
+{
+    "d88b4c010006e9db": {
+        "deviceId": "d88b4c010006e9db",
+        "name": "BackDoor",
+        "token": "584BD0567F1C14823B1773F6E9A49CBF",
+        "type": "DoorSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d7040": {
+        "deviceId": "d88b4c02000d7040",
+        "name": "BedRoomBath",
+        "token": "934BE5DF6BD64F570DCF51526FF8227F",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a8e3": {
+        "deviceId": "d88b4c010007a8e3",
+        "name": "DeepFreezer",
+        "token": "04E354066F1293CE18FFB2B0A9C7E17A",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010006dad8": {
+        "deviceId": "d88b4c010006dad8",
+        "name": "FrontDoor",
+        "token": "D4517AEA41D58AA94D7ECD75FEE63451",
+        "type": "DoorSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d8417": {
+        "deviceId": "d88b4c02000d8417",
+        "name": "Garage",
+        "token": "152A11D44A13DAA47F5699866B0CDB20",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d8ac5": {
+        "deviceId": "d88b4c02000d8ac5",
+        "name": "Garage Bathroom",
+        "token": "1631E4FE12E898E4D5BF8A514B67A8C6",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a4c8": {
+        "deviceId": "d88b4c010007a4c8",
+        "name": "GarageFreezer",
+        "token": "E689E9ADF83F0654F256177AEEA0F431",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a4db": {
+        "deviceId": "d88b4c010007a4db",
+        "name": "GarageFridge",
+        "token": "D384ED0E7784D590A5EFEC3C7CF828B1",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d6ccf": {
+        "deviceId": "d88b4c02000d6ccf",
+        "name": "GarageWaterHeater",
+        "token": "A4F06C58E5C29F1CD3439BAA80CACFDD",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010006cd9c": {
+        "deviceId": "d88b4c010006cd9c",
+        "name": "GateIR",
+        "token": "E14DB1B8AE8D81FBF63A7E647CA5D875",
+        "type": "MotionSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d7297": {
+        "deviceId": "d88b4c02000d7297",
+        "name": "GuestBath",
+        "token": "366CB19746CD66862BA32D993B38090E",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d711d": {
+        "deviceId": "d88b4c02000d711d",
+        "name": "HallBath",
+        "token": "C439149FABDE0147E5C2B907F95A7D28",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000b1286": {
+        "deviceId": "d88b4c02000b1286",
+        "name": "HallSink",
+        "token": "6C976164EF0DC21B7A9540690548D6D1",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c01000654c1": {
+        "deviceId": "d88b4c01000654c1",
+        "name": "Jon",
+        "token": "6A9F3F1D3863659FBB9CCE60AEA5EBBC",
+        "type": "MotionSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a4ab": {
+        "deviceId": "d88b4c010007a4ab",
+        "name": "Kitchen Freezer",
+        "token": "436681C0ACBC7B6DC1D1074F6EB32509",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007aa33": {
+        "deviceId": "d88b4c010007aa33",
+        "name": "KitchenFridge",
+        "token": "BC6E58F9316D07E2D6333936F80C622F",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c0100051262": {
+        "deviceId": "d88b4c0100051262",
+        "name": "KitchenIR",
+        "token": "E10BD4CA1EF292CF841BC53CFE33A2A7",
+        "type": "MotionSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d6e9c": {
+        "deviceId": "d88b4c02000d6e9c",
+        "name": "KitchenSink",
+        "token": "2025F627BF702B5737ACDABC7116D770",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d6e22": {
+        "deviceId": "d88b4c02000d6e22",
+        "name": "KitchenWaterHeater",
+        "token": "0B7CA0D268BA8E28563A6132B9054218",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010006ebd1": {
+        "deviceId": "d88b4c010006ebd1",
+        "name": "Larry",
+        "token": "5EDE888A59171B71BF97EF385470AED9",
+        "type": "DoorSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d7178": {
+        "deviceId": "d88b4c02000d7178",
+        "name": "LaundryRoom",
+        "token": "DA740C29061068AC2F36BAFDCA6B9DF0",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d6ca8": {
+        "deviceId": "d88b4c02000d6ca8",
+        "name": "MasterBath",
+        "token": "4E6342D442E6D22E215C11E71DA008EB",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010006cf76": {
+        "deviceId": "d88b4c010006cf76",
+        "name": "MasterBed",
+        "token": "A3E1A5ABC330C29003564BFF5CF98FB0",
+        "type": "MotionSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000c9959": {
+        "deviceId": "d88b4c02000c9959",
+        "name": "MasterSink",
+        "token": "3400140FB54FE654065448D98E9B8061",
+        "type": "LeakSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c02000d8b7e": {
+        "deviceId": "d88b4c02000d8b7e",
+        "name": "Office",
+        "token": "56BDADDAA08C7AF66D2B949D2C7572D7",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a660": {
+        "deviceId": "d88b4c010007a660",
+        "name": "Pantry Freezer",
+        "token": "F14D4420292B53534F37F672647389A4",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a3f1": {
+        "deviceId": "d88b4c010007a3f1",
+        "name": "PantryFridge",
+        "token": "8027869223ACB54858BC6EA90668B8C6",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010007aa13": {
+        "deviceId": "d88b4c010007aa13",
+        "name": "PlantRoom",
+        "token": "EAACD0093860264ADF1C2E9A4E2CE5B7",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c010005549f": {
+        "deviceId": "d88b4c010005549f",
+        "name": "PlantRoomHeater",
+        "token": "382AFBD67386F775277ADAC2184CF98E",
+        "type": "MultiOutlet",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a40f": {
+        "deviceId": "d88b4c010007a40f",
+        "name": "Porch",
+        "token": "BEF56B6FCE5C8200DD60949F2C7C72CC",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c1604007ee4": {
+        "deviceId": "d88b4c1604007ee4",
+        "name": "SH2",
+        "token": "68DF6AD9ABD1E8648C0161CF5BF06CCD",
+        "type": "SpeakerHub",
+        "parentDeviceId": null
+    },
+    "d88b4c1604005148": {
+        "deviceId": "d88b4c1604005148",
+        "name": "Speaker Hub",
+        "token": "B1E8D3DA318C7C0DD77161C83F279A07",
+        "type": "SpeakerHub",
+        "parentDeviceId": null
+    },
+    "d88b4c010007a3d1": {
+        "deviceId": "d88b4c010007a3d1",
+        "name": "Well House",
+        "token": "07ADA17EB4C5F7A14E5E0CCF9AE6325A",
+        "type": "THSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c01000553d7": {
+        "deviceId": "d88b4c01000553d7",
+        "name": "Wellhouse Heat Lamp",
+        "token": "164CCE5C892920CFC4BED318F3D7E6B1",
+        "type": "MultiOutlet",
+        "parentDeviceId": null
+    },
+    "d88b4c010006ebe8": {
+        "deviceId": "d88b4c010006ebe8",
+        "name": "WODoor",
+        "token": "63B994A0B65D5F08E47E6AEDE71E737D",
+        "type": "DoorSensor",
+        "parentDeviceId": null
+    },
+    "d88b4c160303b2bf": {
+        "deviceId": "d88b4c160303b2bf",
+        "name": "YoLink Hub",
+        "token": "2B64E165FAF1738D28C7BFF2C5C72E4D",
+        "type": "Hub",
+        "parentDeviceId": null
+    }
+}
