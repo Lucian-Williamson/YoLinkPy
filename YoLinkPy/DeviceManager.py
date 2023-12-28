@@ -1,11 +1,13 @@
 import json
 from typing import Any, Type
-from yolink.device import YoLinkDeviceMode, YoLinkDevice
-from yolink.home_manager import YoLinkHome
-from AuthManager import AuthManager
-from MsgManager import MsgListener
+
 from yolink.const import ATTR_DEVICE_TH_SENSOR, ATTR_DEVICE_ID, ATTR_DEVICE_NAME, ATTR_DEVICE_TOKEN, ATTR_DEVICE_TYPE, \
     ATTR_DEVICE_PARENT_ID, ATTR_DEVICE_MOTION_SENSOR, ATTR_DEVICE_LEAK_SENSOR
+from yolink.device import YoLinkDeviceMode, YoLinkDevice
+from yolink.home_manager import YoLinkHome
+
+from AuthManager import AuthManager
+from MsgManager import MsgListener
 
 CELSIUS_TO_FAHRENHEIT_MULTIPLIER = 9 / 5
 CELSIUS_TO_FAHRENHEIT_OFFSET = 32
@@ -23,6 +25,7 @@ class DeviceManager:
     """
 
     def __init__(self):
+
         self._data = {}  # Initialize an empty dictionary to store device data
 
     @staticmethod
@@ -40,54 +43,47 @@ class DeviceManager:
         return attribute_mapping.get(attr)
 
     @staticmethod
-    def load_data() -> dict:
+    def load_data(public_id) -> dict:
         """
         Loads device data from a JSON file.
         """
         try:
-            with open('../data/device.json', 'r') as f:
+            with open(f'../data/{public_id}.json', 'r') as f:
                 return json.load(f)
         except json.JSONDecodeError:
             return {}
 
-    @staticmethod
-    def store_data(data: dict) -> None:
+    def store_data(self, data: dict, id: str) -> None:
         """
         Stores device data as JSON.
         """
-        with open("../data/device.json", "w") as json_file:
+        with open(f'../data/{id}.json', 'w') as json_file:
             json.dump(data, json_file, indent=4)
+        self._data = data
 
-    async def fetch_temperature_data(self, yo_link_home: YoLinkHome, auth_manager: AuthManager,
-                                     msg_manager: MsgListener) -> None:
+    async def fetch_temperature_data(self, yo_link_home: YoLinkHome) -> None:
         """
         Fetches temperature data for YoLink devices and prints it.
         """
-        await yo_link_home.async_setup(auth_manager, msg_manager)
         for device_data in self._data.values():
-            if device_data[ATTR_DEVICE_TYPE] == ATTR_DEVICE_MOTION_SENSOR or \
-                    device_data[ATTR_DEVICE_TYPE] == ATTR_DEVICE_LEAK_SENSOR:
-                device_instance = YoLinkDeviceModeAdapter.validate_python(device_data)
-                device = YoLinkDevice(device=device_instance, client=yo_link_home._http_client)
-                state = await device.fetch_state()
+            device_type = device_data[ATTR_DEVICE_TYPE]
+
+            device_instance = YoLinkDeviceModeAdapter.validate_python(device_data)
+            device = YoLinkDevice(device=device_instance, client=yo_link_home._http_client)
+            state = await device.fetch_state()
+
+            if device_type in [ATTR_DEVICE_MOTION_SENSOR, ATTR_DEVICE_LEAK_SENSOR]:
                 temperature_celsius = state.data['state']['devTemperature']
-                temperature_fahrenheit = round(
-                    temperature_celsius * CELSIUS_TO_FAHRENHEIT_MULTIPLIER + CELSIUS_TO_FAHRENHEIT_OFFSET, 2
-                )
-                print(f'{device_data[ATTR_DEVICE_NAME]:<30} \t {temperature_fahrenheit}')
-
-                pass
-            if device_data[ATTR_DEVICE_TYPE] == ATTR_DEVICE_TH_SENSOR:
-                device_instance = YoLinkDeviceModeAdapter.validate_python(device_data)
-                device = YoLinkDevice(device=device_instance, client=yo_link_home._http_client)
-                state = await device.fetch_state()
-
-                # humidity = state.data['state']['humidity']
+            elif device_type == ATTR_DEVICE_TH_SENSOR:
                 temperature_celsius = state.data['state']['temperature']
-                temperature_fahrenheit = round(
-                    temperature_celsius * CELSIUS_TO_FAHRENHEIT_MULTIPLIER + CELSIUS_TO_FAHRENHEIT_OFFSET, 2
-                )
-                print(f'{device_data[ATTR_DEVICE_NAME]:<30} \t {temperature_fahrenheit}')
+            else:
+                continue  # Skip unknown device types
+
+            temperature_fahrenheit = round(
+                temperature_celsius * CELSIUS_TO_FAHRENHEIT_MULTIPLIER + CELSIUS_TO_FAHRENHEIT_OFFSET, 2
+            )
+
+            print(f"{device_data[ATTR_DEVICE_NAME]:<30} \t {device_type:<15} \t {temperature_fahrenheit}")
 
     @staticmethod
     def _extract_device_data(home_devices: dict) -> dict:
@@ -112,15 +108,43 @@ class DeviceManager:
         device_dict[ATTR_DEVICE_PARENT_ID] = None  # Set ATTR_DEVICE_PARENT_ID to None if not present
         return device_dict
 
-    async def load_devices(self, yo_link_home: YoLinkHome, auth_manager: AuthManager, msg_manager: MsgListener) -> None:
+    async def setup(self, yo_link_home: YoLinkHome, auth_manager: AuthManager, msg_manager: MsgListener) -> None:
+        await yo_link_home.async_setup(auth_manager, msg_manager)
+
+    def _build_temperature_device_dict_(self, yo_link_home: YoLinkHome) -> dict:
+        """
+        Extracts and organizes device data related to temperature monitoring from a YoLinkHome instance.
+
+        Args:
+        - yo_link_home (YoLinkHome): Instance of YoLinkHome containing device information.
+
+        Returns:
+        - dict: A dictionary containing device data for devices associated with temperature monitoring.
+        """
+        all_device_data = DeviceManager._extract_device_data(yo_link_home._home_devices)
+        temperature_devices = {}
+        for device_data in all_device_data.values():
+            if device_data[ATTR_DEVICE_TYPE] in [ATTR_DEVICE_MOTION_SENSOR, ATTR_DEVICE_LEAK_SENSOR,
+                                                 ATTR_DEVICE_TH_SENSOR]:
+                temperature_devices[device_data['deviceId']] = device_data
+        return temperature_devices
+
+    async def load_devices(self, yo_link_home: YoLinkHome, unique_id: str, _load_local: bool) -> None:
         """
         Loads devices and their details from YoLinkHome.
         """
         if self._data:
             return  # Return if data is already populated
 
-        await yo_link_home.async_setup(auth_manager, msg_manager)
+        _devices = {}
+        if _load_local:
+            # Attempt to pull local data from json files...
+            try:
+                _devices = self.load_data(public_id=unique_id)
+            except FileNotFoundError:
+                pass
 
-        device_data = DeviceManager._extract_device_data(yo_link_home._home_devices)
-        self.store_data(device_data)  # Store the device information as JSON
-        self._data = device_data  # Update device data
+        if not _devices:
+            _devices = self._build_temperature_device_dict_(yo_link_home)
+
+        self.store_data(data=_devices, id=unique_id)  # Store the device information as JSON

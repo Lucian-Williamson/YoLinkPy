@@ -16,6 +16,18 @@ IF NOT EXIST data\ (
     echo Folder 'data' already exists.
 )
 
+REM Check if config.yaml exists, if not, create it with required variables
+IF NOT EXIST config.yaml (
+    echo Creating config.yaml file...
+    (
+        echo load_local: true
+        echo homes: []
+    ) > config.yaml
+    echo config.yaml file created.
+) ELSE (
+    echo config.yaml file already exists.
+)
+
 REM Activate the virtual environment
 call env\Scripts\activate
 
@@ -24,5 +36,3 @@ echo Installing Python packages into the 'env' folder...
 pip install -e .
 echo Python packages installed into the 'env' folder
 
-REM Create an empty device.json file in the data folder
-type nul > data\device.json

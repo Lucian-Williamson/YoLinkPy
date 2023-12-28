@@ -1,3 +1,4 @@
+User
 #!/bin/bash
 
 if [ ! -d "env" ]; then
@@ -16,6 +17,18 @@ else
     echo "Folder 'data' already exists."
 fi
 
+# Create config.yaml file if it doesn't exist
+if [ ! -f "config.yaml" ]; then
+    echo "Creating config.yaml file..."
+    cat <<EOF >config.yaml
+load_local: true
+homes: []
+EOF
+    echo "config.yaml file created."
+else
+    echo "config.yaml file already exists."
+fi
+
 # Activate the virtual environment
 source env/bin/activate
 
@@ -24,5 +37,3 @@ echo "Installing Python packages into the 'env' folder..."
 pip install -e .
 echo "Python packages installed into the 'env' folder."
 
-# Create an empty device.json file in the data folder
-touch data/device.json

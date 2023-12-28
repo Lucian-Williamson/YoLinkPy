@@ -1,35 +1,24 @@
 import asyncio
-
 from aiohttp import ClientSession
-from yolink.home_manager import YoLinkHome
-
-from AuthManager import AuthManager
-from DeviceManager import DeviceManager
-from MsgManager import MsgListener
+from NBHManager import NeighborhoodManager  # Importing necessary modules/classes
 
 
 async def main():
-    # Create a session for HTTP requests
+    # Establishing an asynchronous HTTP session
     async with ClientSession() as session:
-        # Initialize custom authentication manager and message listener
-        auth_mgr = AuthManager(session)
-        message_listener = MsgListener()
-        yh = YoLinkHome()
-
-        device_mgr = DeviceManager()
-
+        # Initializing NeighborhoodManager instance for neighborhood management
+        nbh_mgr = NeighborhoodManager(session)
         try:
-            await device_mgr.load_devices(yh, auth_mgr, message_listener)
-            await device_mgr.fetch_temperature_data(yh, auth_mgr, message_listener)
+            # Building the neighborhood data asynchronously
+            await nbh_mgr.build_neighborhood()
+            # Loading additional data asynchronously
+            await nbh_mgr.load_data()
         except Exception as e:
-            # Handle setup failure
-            print(f"Setup failed: {e}")
-        finally:
-            # Close the session after execution
-            await session.close()
+            # Handling any exceptions that occur during the process
+            print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
-    # Run the main function within an event loop
+    # Running the main function within an event loop
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
